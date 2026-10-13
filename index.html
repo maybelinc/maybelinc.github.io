@@ -29,9 +29,10 @@
         radial-gradient(ellipse at 10% 0%, #eee9f3, transparent 40%),
         linear-gradient(180deg, #fff, var(--cream));
       color: var(--ink);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-size: 16px;
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
     a { color: inherit; }
@@ -50,9 +51,10 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
       background: #faf8f4ed;
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -71,10 +73,11 @@
       text-decoration: none;
     }
 
-    .links {
+    /* Desktop Navigation */
+    .links.desktop-nav {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 30px;
       font-size: 15px;
       font-weight: 550;
     }
@@ -86,15 +89,16 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      min-height: 46px;
-      padding: 10px 23px;
+      min-height: 48px;
+      padding: 11px 24px;
       border: 1px solid var(--line);
       border-radius: 99px;
       text-decoration: none;
       font-weight: 650;
-      font-size: 14px;
+      font-size: 14.5px;
       background: #fff;
-      line-height: 1.5;
+      line-height: 1.4;
+      white-space: nowrap;
       transition: transform .15s, box-shadow .15s;
     }
 
@@ -109,6 +113,114 @@
       color: #fff;
     }
 
+    /* Mobile Nav Header Actions */
+    .mobile-nav-group {
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-cta {
+      min-height: 40px;
+      padding: 8px 18px;
+      font-size: 13.5px;
+    }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 0;
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .menu-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px #29204712;
+    }
+
+    .hamburger-line {
+      display: block;
+      width: 19px;
+      height: 2px;
+      background-color: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    /* Animated Hamburger to Close */
+    .menu-open .hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .menu-open .hamburger-line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .menu-open .hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #faf8f4fa;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 24px 48px #2920471a;
+      overflow: hidden;
+      max-height: 0;
+      visibility: hidden;
+      opacity: 0;
+      transition: max-height 0.35s ease, opacity 0.25s ease, visibility 0.35s;
+    }
+
+    .mobile-drawer.is-active {
+      max-height: 420px;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .mobile-drawer-inner {
+      padding: 24px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-nav-link {
+      font-size: 18px;
+      font-weight: 650;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid #ded9e360;
+      transition: color 0.15s;
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--gold);
+    }
+
+    .drawer-cta {
+      margin-top: 8px;
+      width: 100%;
+      min-height: 48px;
+    }
+
+    /* Hero Section */
     .hero {
       display: grid;
       grid-template-columns: 1.15fr .85fr;
@@ -118,18 +230,24 @@
     }
 
     h1 {
-      font-size: clamp(48px, 5.1vw, 76px);
-      line-height: 1.05;
-      letter-spacing: -2.4px;
+      font-size: clamp(46px, 5vw, 76px);
+      line-height: 1.1;
+      letter-spacing: -2px;
       margin: 0 0 28px;
       font-weight: 850;
+      word-break: normal;
+      overflow-wrap: break-word;
     }
 
-    h1 span {
+    .hero-line {
+      display: block;
+    }
+
+    .hero-by {
       display: block;
       color: #81708f;
       font-size: .52em;
-      letter-spacing: -1px;
+      letter-spacing: -0.8px;
       line-height: 1.35;
       margin-top: 14px;
       font-weight: 700;
@@ -137,7 +255,7 @@
 
     .tagline {
       font-size: clamp(20px, 1.95vw, 26px);
-      line-height: 1.4;
+      line-height: 1.42;
       font-weight: 700;
       letter-spacing: -0.3px;
       color: var(--ink);
@@ -146,7 +264,7 @@
     }
 
     .hero p {
-      font-size: clamp(17px, 1.2vw, 19px);
+      font-size: clamp(16.5px, 1.2vw, 19px);
       line-height: 1.68;
       color: var(--muted);
       max-width: 54ch;
@@ -192,8 +310,9 @@
       margin-top: 10px;
     }
 
+    /* Content Sections */
     section.body-section {
-      padding: 62px 0;
+      padding: 64px 0;
       border-top: 1px solid var(--line);
       display: grid;
       grid-template-columns: .85fr 1.15fr;
@@ -211,7 +330,7 @@
 
     h2 {
       font-size: clamp(27px, 2.8vw, 39px);
-      line-height: 1.16;
+      line-height: 1.18;
       letter-spacing: -1px;
       margin: 0;
       max-width: 17ch;
@@ -269,6 +388,7 @@
       padding: 30px;
     }
 
+    /* Contact Section */
     .contact {
       margin: 35px 0 65px;
       border: 1px solid var(--line);
@@ -294,22 +414,26 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 8px;
+      gap: 10px;
     }
 
     .contact-details a {
       font-weight: 650;
+      font-size: 16px;
       text-decoration: none;
+      transition: color 0.15s;
     }
 
     .contact-details a:hover {
       text-decoration: underline;
+      color: var(--gold);
     }
 
     .addresses {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
+      margin-top: 36px;
     }
 
     .address {
@@ -340,6 +464,7 @@
       font-size: 12px;
     }
 
+    /* Modal Viewer */
     dialog {
       padding: 0;
       border: 0;
@@ -380,86 +505,108 @@
       top: -100px;
       background: white;
       padding: 10px;
-      z-index: 20;
+      z-index: 200;
     }
 
     .skip:focus { top: 10px; }
 
-    @media (min-width: 1700px) {
-      .wrap { width: min(1480px, calc(100% - 100px)); }
-      .hero { gap: 80px; }
-      h1 { font-size: 84px; }
-      .tagline { font-size: 28px; }
-      .hero p { font-size: 20px; }
-    }
-
-    @media (max-width: 1000px) {
-      .hero { gap: 36px; }
-      .links { gap: 20px; }
-      section.body-section { gap: 35px; }
-      .contact { padding: 32px; }
-      .contact-top { gap: 35px; }
-    }
-
-    @media (max-width: 760px) {
-      .wrap { width: calc(100% - 36px); }
-      nav { min-height: 70px; }
-      .links .nav-item { display: none; }
-      .links { gap: 0; }
-      .logo { font-size: 22px; }
+    /* Responsive Breakpoints: Tablet & Mobile */
+    @media (max-width: 880px) {
+      .wrap { width: calc(100% - 44px); }
+      nav { min-height: 72px; }
+      
+      .links.desktop-nav { display: none; }
+      .mobile-nav-group { display: flex; }
+      .mobile-drawer { display: block; }
 
       .hero {
         grid-template-columns: 1fr;
-        gap: 32px;
-        padding: 38px 0 45px;
+        gap: 36px;
+        padding: 42px 0 54px;
       }
 
       h1 {
-        max-width: 15ch;
-        font-size: clamp(39px, 8vw, 58px);
+        font-size: clamp(38px, 8vw, 54px);
+        line-height: 1.18;
+        letter-spacing: -1.2px;
+        margin: 0 0 24px;
       }
 
-      .hero-br { display: none; }
-      .hero p { max-width: none; }
+      .hero-by {
+        margin-top: 10px;
+        letter-spacing: -0.5px;
+      }
+
+      .tagline {
+        font-size: clamp(19px, 4.4vw, 22px);
+        line-height: 1.45;
+        margin-bottom: 20px;
+        max-width: 100%;
+      }
+
+      .hero p {
+        font-size: 16.5px;
+        line-height: 1.65;
+        max-width: 100%;
+        margin: 0 0 28px;
+      }
 
       .photo {
-        width: min(100%, 520px);
-        margin: auto;
+        width: min(100%, 540px);
+        margin: 10px auto 0;
       }
 
       section.body-section {
         grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 40px 0;
+        gap: 26px;
+        padding: 44px 0;
       }
 
-      h2 { max-width: 23ch; }
+      h2 { max-width: 25ch; }
 
       .contact-top {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 26px;
       }
 
-      .addresses { grid-template-columns: 1fr; }
+      .addresses {
+        grid-template-columns: 1fr;
+        margin-top: 26px;
+      }
 
       .contact {
-        padding: 25px;
+        padding: 30px;
         margin-top: 15px;
       }
+    }
 
-      .brand-panel { padding: 24px; }
+    @media (max-width: 600px) {
+      .cards { grid-template-columns: 1fr; }
+    }
 
+    @media (max-width: 440px) {
+      .wrap { width: calc(100% - 32px); }
+      .logo { font-size: 22px; }
+      .header-cta { display: none; } /* Keeps header ultra-clean on compact screens */
+      .actions .btn { width: 100%; }
+      h1 {
+        font-size: clamp(32px, 8.4vw, 42px);
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+      }
+      .contact { padding: 22px; }
       footer {
         flex-direction: column;
         gap: 4px;
       }
     }
 
-    @media (max-width: 430px) {
-      .cards { grid-template-columns: 1fr; }
-      .btn { padding: 10px 18px; }
-      .actions .btn { min-height: 48px; padding: 11px 22px; }
-      h1 { letter-spacing: -1.5px; }
+    @media (min-width: 1700px) {
+      .wrap { width: min(1480px, calc(100% - 100px)); }
+      .hero { gap: 80px; }
+      h1 { font-size: 82px; }
+      .tagline { font-size: 28px; }
+      .hero p { font-size: 20px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -475,20 +622,47 @@
   <header>
     <nav class="wrap" aria-label="Main navigation">
       <a class="logo" href="#main">MAYBEL</a>
-      <div class="links">
+      
+      <!-- Desktop Navigation -->
+      <div class="links desktop-nav">
         <a class="nav-item" href="#venues">For Venues</a>
         <a class="nav-item" href="#service">Our Service</a>
         <a class="nav-item" href="#brands">For Brands</a>
         <a class="nav-item" href="#contact">Contact</a>
         <a class="btn primary" href="#contact">Request a Demo</a>
       </div>
+
+      <!-- Mobile/Tablet Actions -->
+      <div class="mobile-nav-group">
+        <a class="btn primary header-cta" href="#contact">Request a Demo</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
     </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-nav-drawer" aria-hidden="true">
+      <div class="mobile-drawer-inner">
+        <a class="mobile-nav-link" href="#venues">For Venues</a>
+        <a class="mobile-nav-link" href="#service">Our Service</a>
+        <a class="mobile-nav-link" href="#brands">For Brands</a>
+        <a class="mobile-nav-link" href="#contact">Contact</a>
+        <a class="btn primary drawer-cta" href="#contact">Request a Demo</a>
+      </div>
+    </div>
   </header>
 
   <main class="wrap" id="main">
     <section class="hero">
       <div>
-        <h1>Beer &amp; Alcohol<br class="hero-br">Vending Machines <span>by Maybel</span></h1>
+        <h1>
+          <span class="hero-line">Beer &amp; Alcohol</span>
+          <span class="hero-line">Vending Machines</span>
+          <span class="hero-by">by Maybel</span>
+        </h1>
 
         <div class="tagline">
           Convenient self-service for guests. New sales opportunities for businesses.
@@ -523,8 +697,8 @@
     </section>
 
     <section class="body-section" id="venues">
-      <div id="locations">
-        <p class="eyebrow">Locations</p>
+      <div>
+        <p class="eyebrow">For Venues</p>
         <h2>More Convenience. More Places to Serve.</h2>
       </div>
 
@@ -731,23 +905,66 @@
   </dialog>
 
   <script>
+    // Photo Lightbox Dialog
     const viewer = document.getElementById('image-view');
+    const enlargeBtn = document.getElementById('enlarge');
 
-    document.getElementById('enlarge').addEventListener('click', () => {
-      viewer.showModal();
-      document.body.style.overflow = 'hidden';
+    if (enlargeBtn && viewer) {
+      enlargeBtn.addEventListener('click', () => {
+        viewer.showModal();
+        document.body.style.overflow = 'hidden';
+      });
+
+      viewer.querySelector('.close').addEventListener('click', () => {
+        viewer.close();
+      });
+
+      viewer.addEventListener('close', () => {
+        document.body.style.overflow = '';
+      });
+
+      viewer.addEventListener('click', (event) => {
+        if (event.target === viewer) viewer.close();
+      });
+    }
+
+    // Mobile Navigation Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileDrawer = document.getElementById('mobile-nav-drawer');
+    const header = document.querySelector('header');
+
+    function toggleMenu(forceOpen) {
+      const isOpen = forceOpen !== undefined ? forceOpen : !mobileDrawer.classList.contains('is-active');
+      mobileDrawer.classList.toggle('is-active', isOpen);
+      header.classList.toggle('menu-open', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    }
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
     });
 
-    viewer.querySelector('.close').addEventListener('click', () => {
-      viewer.close();
+    // Close mobile menu when a navigation item is selected
+    mobileDrawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMenu(false);
+      });
     });
 
-    viewer.addEventListener('close', () => {
-      document.body.style.overflow = '';
+    // Close mobile menu if clicked outside header
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target) && mobileDrawer.classList.contains('is-active')) {
+        toggleMenu(false);
+      }
     });
 
-    viewer.addEventListener('click', (event) => {
-      if (event.target === viewer) viewer.close();
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileDrawer.classList.contains('is-active')) {
+        toggleMenu(false);
+      }
     });
   </script>
 </body>
