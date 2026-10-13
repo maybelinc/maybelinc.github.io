@@ -43,7 +43,7 @@
     }
 
     .wrap {
-      width: min(1360px, calc(100% - 64px));
+      width: min(1320px, calc(100% - 64px));
       margin: auto;
     }
 
@@ -61,7 +61,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      min-height: 84px;
+      min-height: 82px;
     }
 
     .logo {
@@ -86,13 +86,13 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      min-height: 52px;
-      padding: 12px 28px;
+      min-height: 46px;
+      padding: 10px 23px;
       border: 1px solid var(--line);
       border-radius: 99px;
       text-decoration: none;
       font-weight: 650;
-      font-size: 15px;
+      font-size: 14px;
       background: #fff;
       line-height: 1.5;
       transition: transform .15s, box-shadow .15s;
@@ -101,12 +101,6 @@
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 22px #29204715;
-    }
-
-    nav .btn {
-      min-height: 44px;
-      padding: 9px 22px;
-      font-size: 14px;
     }
 
     .primary {
@@ -118,22 +112,16 @@
     .hero {
       display: grid;
       grid-template-columns: 1.15fr .85fr;
-      gap: 60px;
+      gap: 56px;
       align-items: start;
-      padding: 68px 0 84px;
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
+      padding: 64px 0 80px;
     }
 
     h1 {
-      font-size: clamp(48px, 5.2vw, 82px);
-      line-height: 1.04;
-      letter-spacing: -2.8px;
-      margin: 0 0 30px;
-      max-width: 15ch;
+      font-size: clamp(48px, 5.1vw, 76px);
+      line-height: 1.05;
+      letter-spacing: -2.4px;
+      margin: 0 0 28px;
       font-weight: 850;
     }
 
@@ -142,33 +130,39 @@
       color: #81708f;
       font-size: .52em;
       letter-spacing: -1px;
-      line-height: 1.32;
-      margin-top: 16px;
+      line-height: 1.35;
+      margin-top: 14px;
       font-weight: 700;
     }
 
     .tagline {
-      font-size: clamp(21px, 2.05vw, 29px);
-      line-height: 1.38;
-      font-weight: 750;
-      letter-spacing: -0.5px;
+      font-size: clamp(20px, 1.95vw, 26px);
+      line-height: 1.4;
+      font-weight: 700;
+      letter-spacing: -0.3px;
       color: var(--ink);
-      margin-bottom: 26px;
-      max-width: 40ch;
+      margin-bottom: 24px;
+      max-width: 44ch;
     }
 
     .hero p {
-      font-size: clamp(17px, 1.25vw, 19.5px);
-      line-height: 1.65;
+      font-size: clamp(17px, 1.2vw, 19px);
+      line-height: 1.68;
       color: var(--muted);
-      max-width: 58ch;
-      margin: 0 0 34px;
+      max-width: 54ch;
+      margin: 0 0 32px;
     }
 
     .actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+    }
+
+    .actions .btn {
+      min-height: 52px;
+      padding: 12px 28px;
+      font-size: 15px;
     }
 
     .photo { margin: 0; }
@@ -296,16 +290,15 @@
     }
 
     .contact-details {
-      margin-top: 24px;
+      margin: 22px 0 0;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 10px;
+      gap: 8px;
     }
 
     .contact-details a {
       font-weight: 650;
-      font-size: 16px;
       text-decoration: none;
     }
 
@@ -393,11 +386,11 @@
     .skip:focus { top: 10px; }
 
     @media (min-width: 1700px) {
-      .wrap { width: min(1500px, calc(100% - 100px)); }
+      .wrap { width: min(1480px, calc(100% - 100px)); }
       .hero { gap: 80px; }
-      h1 { font-size: 88px; }
-      .tagline { font-size: 32px; }
-      .hero p { font-size: 21px; }
+      h1 { font-size: 84px; }
+      .tagline { font-size: 28px; }
+      .hero p { font-size: 20px; }
     }
 
     @media (max-width: 1000px) {
@@ -426,6 +419,7 @@
         font-size: clamp(39px, 8vw, 58px);
       }
 
+      .hero-br { display: none; }
       .hero p { max-width: none; }
 
       .photo {
@@ -463,7 +457,8 @@
 
     @media (max-width: 430px) {
       .cards { grid-template-columns: 1fr; }
-      .btn { padding: 10px 20px; }
+      .btn { padding: 10px 18px; }
+      .actions .btn { min-height: 48px; padding: 11px 22px; }
       h1 { letter-spacing: -1.5px; }
     }
 
@@ -492,8 +487,8 @@
 
   <main class="wrap" id="main">
     <section class="hero">
-      <div class="hero-content">
-        <h1>Beer &amp; Alcohol Vending Machines <span>by Maybel</span></h1>
+      <div>
+        <h1>Beer &amp; Alcohol<br class="hero-br">Vending Machines <span>by Maybel</span></h1>
 
         <div class="tagline">
           Convenient self-service for guests. New sales opportunities for businesses.
@@ -528,9 +523,8 @@
     </section>
 
     <section class="body-section" id="venues">
-      <span id="locations"></span>
-      <div>
-        <p class="eyebrow">Venues</p>
+      <div id="locations">
+        <p class="eyebrow">Locations</p>
         <h2>More Convenience. More Places to Serve.</h2>
       </div>
 
