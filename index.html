@@ -62,8 +62,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
       min-height: 82px;
+      padding: 10px 0;
     }
 
     .logo {
@@ -71,19 +72,34 @@
       font-weight: 850;
       letter-spacing: 2px;
       text-decoration: none;
+      flex-shrink: 0;
     }
 
-    /* Desktop Navigation */
-    .links.desktop-nav {
+    /* Navigation Container */
+    .nav-right {
       display: flex;
       align-items: center;
-      gap: 30px;
-      font-size: 15px;
-      font-weight: 550;
+      gap: 28px;
     }
 
-    .links a { text-decoration: none; }
-    .links a:hover { text-decoration: underline; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 15px;
+      font-weight: 550;
+      white-space: nowrap;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
 
     .btn {
       display: inline-flex;
@@ -113,111 +129,10 @@
       color: #fff;
     }
 
-    /* Mobile Nav Header Actions */
-    .mobile-nav-group {
-      display: none;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .header-cta {
-      min-height: 40px;
-      padding: 8px 18px;
-      font-size: 13.5px;
-    }
-
-    .menu-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      width: 44px;
-      height: 44px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      cursor: pointer;
-      padding: 0;
-      transition: transform .15s, box-shadow .15s;
-    }
-
-    .menu-toggle:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px #29204712;
-    }
-
-    .hamburger-line {
-      display: block;
-      width: 19px;
-      height: 2px;
-      background-color: var(--ink);
-      border-radius: 2px;
-      transition: transform 0.25s ease, opacity 0.2s ease;
-    }
-
-    /* Animated Hamburger to Close */
-    .menu-open .hamburger-line:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .menu-open .hamburger-line:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    .menu-open .hamburger-line:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    /* Mobile Drawer */
-    .mobile-drawer {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background: #faf8f4fa;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--line);
-      box-shadow: 0 24px 48px #2920471a;
-      overflow: hidden;
-      max-height: 0;
-      visibility: hidden;
-      opacity: 0;
-      transition: max-height 0.35s ease, opacity 0.25s ease, visibility 0.35s;
-    }
-
-    .mobile-drawer.is-active {
-      max-height: 420px;
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .mobile-drawer-inner {
-      padding: 24px 32px 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .mobile-nav-link {
-      font-size: 18px;
-      font-weight: 650;
-      color: var(--ink);
-      text-decoration: none;
-      padding: 8px 0;
-      border-bottom: 1px solid #ded9e360;
-      transition: color 0.15s;
-    }
-
-    .mobile-nav-link:hover {
-      color: var(--gold);
-    }
-
-    .drawer-cta {
-      margin-top: 8px;
-      width: 100%;
-      min-height: 48px;
+    .nav-btn {
+      min-height: 42px;
+      padding: 8px 20px;
+      font-size: 14px;
     }
 
     /* Hero Section */
@@ -510,14 +425,41 @@
 
     .skip:focus { top: 10px; }
 
-    /* Responsive Breakpoints: Tablet & Mobile */
-    @media (max-width: 880px) {
-      .wrap { width: calc(100% - 44px); }
-      nav { min-height: 72px; }
-      
-      .links.desktop-nav { display: none; }
-      .mobile-nav-group { display: flex; }
-      .mobile-drawer { display: block; }
+    /* Tablet & Mobile Layout (PublicTheme Navigation Layout) */
+    @media (max-width: 860px) {
+      .wrap { width: calc(100% - 40px); }
+      nav {
+        min-height: auto;
+        padding: 14px 0;
+        gap: 14px;
+      }
+
+      .logo {
+        font-size: 22px;
+        letter-spacing: 1.5px;
+      }
+
+      /* Stack links on top and buttons on bottom to mirror PublicTheme */
+      .nav-right {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+      }
+
+      .nav-links {
+        gap: 16px;
+        font-size: 13px;
+      }
+
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .nav-btn {
+        min-height: 36px;
+        padding: 6px 14px;
+        font-size: 13px;
+      }
 
       .hero {
         grid-template-columns: 1fr;
@@ -585,9 +527,27 @@
     }
 
     @media (max-width: 440px) {
-      .wrap { width: calc(100% - 32px); }
-      .logo { font-size: 22px; }
-      .header-cta { display: none; } /* Keeps header ultra-clean on compact screens */
+      .wrap { width: calc(100% - 28px); }
+      .logo {
+        font-size: 19px;
+        letter-spacing: 1px;
+      }
+
+      .nav-links {
+        gap: 11px;
+        font-size: 12px;
+      }
+
+      .nav-actions {
+        gap: 6px;
+      }
+
+      .nav-btn {
+        min-height: 33px;
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+
       .actions .btn { width: 100%; }
       h1 {
         font-size: clamp(32px, 8.4vw, 42px);
@@ -623,36 +583,19 @@
     <nav class="wrap" aria-label="Main navigation">
       <a class="logo" href="#main">MAYBEL</a>
       
-      <!-- Desktop Navigation -->
-      <div class="links desktop-nav">
-        <a class="nav-item" href="#venues">For Venues</a>
-        <a class="nav-item" href="#service">Our Service</a>
-        <a class="nav-item" href="#brands">For Brands</a>
-        <a class="nav-item" href="#contact">Contact</a>
-        <a class="btn primary" href="#contact">Request a Demo</a>
-      </div>
-
-      <!-- Mobile/Tablet Actions -->
-      <div class="mobile-nav-group">
-        <a class="btn primary header-cta" href="#contact">Request a Demo</a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
+      <!-- PublicTheme-style Navigation: Shows all sections on desktop and mobile -->
+      <div class="nav-right">
+        <div class="nav-links">
+          <a class="nav-item" href="#venues">For Venues</a>
+          <a class="nav-item" href="#service">Our Service</a>
+          <a class="nav-item" href="#brands">For Brands</a>
+        </div>
+        <div class="nav-actions">
+          <a class="btn nav-btn" href="#contact">Contact</a>
+          <a class="btn primary nav-btn" href="#contact">Request a Demo</a>
+        </div>
       </div>
     </nav>
-
-    <!-- Mobile Navigation Drawer -->
-    <div class="mobile-drawer" id="mobile-nav-drawer" aria-hidden="true">
-      <div class="mobile-drawer-inner">
-        <a class="mobile-nav-link" href="#venues">For Venues</a>
-        <a class="mobile-nav-link" href="#service">Our Service</a>
-        <a class="mobile-nav-link" href="#brands">For Brands</a>
-        <a class="mobile-nav-link" href="#contact">Contact</a>
-        <a class="btn primary drawer-cta" href="#contact">Request a Demo</a>
-      </div>
-    </div>
   </header>
 
   <main class="wrap" id="main">
@@ -927,45 +870,6 @@
         if (event.target === viewer) viewer.close();
       });
     }
-
-    // Mobile Navigation Toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileDrawer = document.getElementById('mobile-nav-drawer');
-    const header = document.querySelector('header');
-
-    function toggleMenu(forceOpen) {
-      const isOpen = forceOpen !== undefined ? forceOpen : !mobileDrawer.classList.contains('is-active');
-      mobileDrawer.classList.toggle('is-active', isOpen);
-      header.classList.toggle('menu-open', isOpen);
-      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      mobileDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    }
-
-    menuToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu();
-    });
-
-    // Close mobile menu when a navigation item is selected
-    mobileDrawer.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        toggleMenu(false);
-      });
-    });
-
-    // Close mobile menu if clicked outside header
-    document.addEventListener('click', (e) => {
-      if (!header.contains(e.target) && mobileDrawer.classList.contains('is-active')) {
-        toggleMenu(false);
-      }
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileDrawer.classList.contains('is-active')) {
-        toggleMenu(false);
-      }
-    });
   </script>
 </body>
 </html>
